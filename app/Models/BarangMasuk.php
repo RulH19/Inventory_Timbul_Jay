@@ -17,4 +17,8 @@ class BarangMasuk extends Model
         'stok',
         'nama_penerima'
     ];
+    public function jenisBarang()
+    {
+        return $this->belongsTo(JenisBarang::class);
+    }
 }

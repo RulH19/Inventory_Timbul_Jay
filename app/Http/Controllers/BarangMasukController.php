@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarangMasuk;
+use App\Models\JenisBarang;
 use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
@@ -15,8 +16,8 @@ class BarangMasukController extends Controller
     }
     public function tambah()
     {
-
-        return view('barangMasuk.form', );
+        $jenisBarang = JenisBarang::get();
+        return view('barangMasuk.form', ['jenisBarang' => $jenisBarang]);
     }
     public function simpan(Request $request)
     {
@@ -34,8 +35,9 @@ class BarangMasukController extends Controller
     }
     public function edit($id)
     {
+        $jenisBarang = JenisBarang::get();
         $barang = BarangMasuk::find($id)->first();
-        return view('barangMasuk.form', ['barang' => $barang]);
+        return view('barangMasuk.form', ['barang' => $barang, 'jenisBarang' => $jenisBarang]);
     }
     public function update($id, Request $request)
     {

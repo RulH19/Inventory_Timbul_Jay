@@ -34,7 +34,7 @@
                                     @endphp
                                     @foreach ($jenisBarang as $barang)
                                     <tr>
-                                        <th>{{ $no }}</th>
+                                        <th>{{ $no++}}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         <td><a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>

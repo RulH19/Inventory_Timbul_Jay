@@ -37,7 +37,7 @@
                                     @endphp
                                     @foreach ($data as $barang)
                                     <tr>
-                                        <th>{{ $no }}</th>
+                                        <th>{{ $no++ }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ $barang ->harga }}</td>

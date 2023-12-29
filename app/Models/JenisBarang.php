@@ -13,5 +13,12 @@ class JenisBarang extends Model
         'id_barang',
         'nama_barang',
     ];
-
+    public function barangMasuk()
+    {
+        return $this->hasMany(BarangMasuk::class, 'id_barang');
+    }
+    public function barangKeluar()
+    {
+        return $this->hasMany(BarangKeluar::class, 'id_barang');
+    }
 }

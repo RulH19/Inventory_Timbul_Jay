@@ -12,7 +12,12 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="id_barang">Id Barang</label>
-                        <input type="text" class="form-control" id="id_barang" name="id_barang" value="{{ isset($barang) ? $barang->id_barang :'' }}">
+                        <select name="id_barang" id="id_barang" class="custom-select">
+                            <option value="" selected disabled hidden>-- Pilih Jenis Barang --</option>
+                            @foreach ($jenisBarang as $row)
+                                <option value="{{ $row->nama_barang }}" {{ isset($barang) ? ($barang->id_barang == $row->id_barang ? 'selected' : '') : '' }}>{{ $row->nama_barang }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
