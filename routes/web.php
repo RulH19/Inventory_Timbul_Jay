@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\BarangKeluarController;
 
 /*
@@ -34,4 +35,12 @@ Route::controller(BarangKeluarController::class)->prefix('barangKeluar')->group(
     Route::get('edit/{id}', 'edit')->name('barangKeluar.edit');
     Route::post('edit/{id}', 'update')->name('barangKeluar.tambah.update');
     Route::get('hapus/{id}', 'hapus')->name('barangKeluar.hapus');
+});
+Route::controller(JenisBarangController::class)->prefix('jenisBarang')->group(function () {
+    Route::get('', 'index')->name('jenisBarang');
+    Route::get('tambah', 'tambah')->name('jenisBarang.tambah');
+    Route::post('tambah', 'simpan')->name('jenisBarang.tambah.simpan');
+    Route::get('edit/{id}', 'edit')->name('jenisBarang.edit');
+    Route::post('edit/{id}', 'update')->name('jenisBarang.tambah.update');
+    Route::get('hapus/{id}', 'hapus')->name('jenisBarang.hapus');
 });

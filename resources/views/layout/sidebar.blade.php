@@ -36,7 +36,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('jenisBarang') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Jenis Barang</span></a>
     </li>
