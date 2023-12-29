@@ -15,18 +15,5 @@ class Barang extends Model
         'nama_barang',
         'harga',
         'stok',
-        'nama_penerima',
-        'nama_pengirim'
     ];
-
-    // Definisikan relasi ke model Kategori
-    public function barangMasuk()
-    {
-        return $this->hasMany(Barang::class, 'id_barang');
-    }
-
-    public function barangKeluar()
-    {
-        return $this->hasMany(Barang::class, 'id_barang');
-    }
 }

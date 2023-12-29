@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarangMasukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::controller(BarangMasukController::class)->prefix('barangMasuk')->group(function () {
+    Route::get('', 'index')->name('barangMasuk');
+    Route::get('tambah', 'tambah')->name('barangMasuk.tambah');
+    Route::post('tambah', 'simpan')->name('barangMasuk.tambah.simpan');
+    Route::get('edit/{id}', 'edit')->name('barangMasuk.edit');
+    Route::post('edit/{id}', 'update')->name('barangMasuk.tambah.update');
+    Route::get('hapus/{id}', 'hapus')->name('barangMasuk.hapus');
 });
