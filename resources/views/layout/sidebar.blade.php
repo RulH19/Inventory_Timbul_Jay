@@ -21,7 +21,7 @@
             <span>Data Master</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="">User</a>
+            <a class="dropdown-item" href="{{ route('user') }}">User</a>
             <a class="dropdown-item" href="">Barang</a>
         </div>
     </li>

@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="id_barang">Id Barang</label>
                         <select name="id_barang" id="id_barang" class="custom-select">
-                            <option value="" selected disabled hidden>-- Pilih Jenis Barang --</option>
+                            <option value="{{ isset($barang) ? $barang->nama_barang :'' }}" selected disabled hidden>-- Pilih Jenis Barang --</option>
                             @foreach ($jenisBarang as $row)
                                 <option value="{{ $row->nama_barang }}" {{ isset($barang) ? ($barang->id_barang == $row->id_barang ? 'selected' : '') : '' }}>{{ $row->id_barang }}</option>
                             @endforeach

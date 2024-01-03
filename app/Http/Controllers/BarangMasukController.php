@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Barang;
 use App\Models\BarangMasuk;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
@@ -30,6 +32,19 @@ class BarangMasukController extends Controller
         ];
 
         BarangMasuk::create($data);
+        $data2 = [
+            'id_barang' => $request->id_barang,
+            'nama_barang' => $request->nama_barang,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+        ];
+        if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
+            // Jika data sudah ada, lakukan update quantity
+            Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
+        } else {
+            // Jika data belum ada, lakukan insert
+            Barang::create($data2);
+        }
 
         return redirect()->route('barangMasuk');
     }
@@ -51,6 +66,19 @@ class BarangMasukController extends Controller
 
         BarangMasuk::find($id)->update($data);
 
+        $data2 = [
+            'id_barang' => $request->id_barang,
+            'nama_barang' => $request->nama_barang,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+        ];
+        if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
+            // Jika data sudah ada, lakukan update quantity
+            Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
+        } else {
+            // Jika data belum ada, lakukan insert
+            Barang::create($data2);
+        }
         return redirect()->route('barangMasuk');
     }
     public function hapus($id)
