@@ -18,8 +18,12 @@ class JenisBarangController extends Controller
     }
     public function simpan(Request $request)
     {
-        JenisBarang::create(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
 
+        if (JenisBarang::where('id_barang', $request->id_barang)->value('id_barang')) {
+            return redirect()->route('jenisBarang');
+        } else {
+            JenisBarang::create(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
+        }
         return redirect()->route('jenisBarang');
     }
 
