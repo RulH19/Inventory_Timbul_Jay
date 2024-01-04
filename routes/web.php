@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\BarangKeluarController;
@@ -21,12 +22,15 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAksi')->name('login.aksi');
-
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::controller(BarangController::class)->prefix('barang')->group(function () {
+    Route::get('', 'index')->name('barang');
+});
 
 Route::controller(BarangMasukController::class)->prefix('barangMasuk')->group(function () {
     Route::get('', 'index')->name('barangMasuk');

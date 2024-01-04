@@ -1,10 +1,10 @@
 @extends('layout.app')
-@section('title', 'Barang Masuk')
+@section('title', 'Data Barang')
 @section('content')
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Table Barang Masuk</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Table Barang</h6>
     </div>
     <div class="card-body">
         <div class="row">
@@ -12,12 +12,13 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Data Table Barang Masuk</h4>
-                            <a href="{{  route('barangMasuk.tambah') }}" class="btn btn-primary btn-round ml-auto">Tambah Barang</a>
+                            <h4 class="card-title">Data Table Barang</h4>
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- Modal -->
                         <div class="table-responsive">
+
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -26,7 +27,6 @@
                                         <th>Nama Barang</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
-                                        <th>Nama Penerima</th>
                                     </tr>
                                 </thead>                                
                                 <tbody>
@@ -39,13 +39,9 @@
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ $barang ->harga }}</td>
-                                        <td>{{ $barang ->stok }}</td>
-                                        <td>{{ $barang ->nama_penerima }}</td>
-                                        <td>
-                                            <a href="{{  route('barangMasuk.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('barangMasuk.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a>
-                                        </td>
-                                    </tr>                                        
+                                        <td>{{ $barang ->stok }}</td>                                        
+                                    </tr>
+                                        
                                     @endforeach
                                 </tbody>
                             </table>
@@ -54,7 +50,8 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        
     </div>
 </div>
 @endsection

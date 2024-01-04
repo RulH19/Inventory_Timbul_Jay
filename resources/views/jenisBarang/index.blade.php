@@ -17,9 +17,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <!-- Modal -->
                         <div class="table-responsive">
-
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -37,20 +35,19 @@
                                         <th>{{ $no++}}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
-                                        <td><a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('jenisBarang.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a></td>
-                                    </tr>
-                                        
+                                        <td>
+                                            <a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
+                                            <a href="{{  route('jenisBarang.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a>
+                                        </td>
+                                    </tr>                                        
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        
+                        </div>                        
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>        
     </div>
 </div>
 @endsection

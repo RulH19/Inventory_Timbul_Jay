@@ -21,4 +21,5 @@ class JenisBarang extends Model
     {
         return $this->hasMany(BarangKeluar::class, 'id_barang');
     }
+
 }
