@@ -53,6 +53,8 @@ class BarangMasukController extends Controller
     {
         $jenisBarang = JenisBarang::get();
         $barang = BarangMasuk::find($id);
+        $stokToDecrement = $barang->stok;
+        Barang::where('id_barang', $barang->id_barang)->decrement('stok', $stokToDecrement);
         return view('barangMasuk.form', ['barang' => $barang, 'jenisBarang' => $jenisBarang]);
     }
     public function update($id, Request $request)
@@ -74,10 +76,8 @@ class BarangMasukController extends Controller
             'stok' => $request->stok,
         ];
         if (Barang::where('id_barang', $request->id_barang)->exists()) {
-            // Jika data sudah ada, lakukan update quantity
             Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
         } else {
-            // Jika data belum ada, lakukan insert
             Barang::create($data2);
         }
         return redirect()->route('barangMasuk');
@@ -87,8 +87,9 @@ class BarangMasukController extends Controller
 
         $barangMasuk = BarangMasuk::find($id);
         $stokToDecrement = $barangMasuk->stok;
-        $barangMasuk->delete();
         Barang::where('id_barang', $barangMasuk->id_barang)->decrement('stok', $stokToDecrement);
+        $barangMasuk->delete();
+
 
         return redirect()->route('barangMasuk');
     }

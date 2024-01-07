@@ -32,7 +32,11 @@ class BarangKeluarController extends Controller
         ];
         $barang = Barang::where('id_barang', $request->id_barang)->first();
         Alert::success('Berhasil', 'Data Telah Ditambah');
-        if ($barang && $barang->stok >= $request->stok) {
+        $kondisi = Barang::where('id_barang', $request->id_barang)->exists();
+        if (!$kondisi) {
+            Alert::error('Gagal', 'Tidak ada barang');
+            return redirect()->back()->with('Gagal', 'Tidak ada barang');
+        } else if ($barang && $barang->stok >= $request->stok) {
             Barang::where('id_barang', $request->id_barang)->decrement('stok', $request->stok);
             BarangKeluar::create($data);
         } else {
@@ -44,6 +48,8 @@ class BarangKeluarController extends Controller
     public function edit($id)
     {
         $barang = BarangKeluar::find($id);
+        $stokToDecrement = $barang->stok;
+        Barang::where('id_barang', $barang->id_barang)->increment('stok', $stokToDecrement);
         $jenisBarang = JenisBarang::get();
         return view('barangKeluar.form', ['barang' => $barang, 'jenisBarang' => $jenisBarang]);
     }
@@ -74,8 +80,9 @@ class BarangKeluarController extends Controller
 
         $barangKeluar = BarangKeluar::find($id);
         $stokToDecrement = $barangKeluar->stok;
-        $barangKeluar->delete();
         Barang::where('id_barang', $barangKeluar->id_barang)->increment('stok', $stokToDecrement);
+        $barangKeluar->delete();
+
 
         return redirect()->route('barangKeluar');
     }
