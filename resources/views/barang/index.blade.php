@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Data Table Barang</h4>
+                            <h4 class="card-title">Data Barang</h4>
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,7 +38,7 @@
                                         <th>{{ $no++ }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
-                                        <td>{{ $barang ->harga }}</td>
+                                        <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>                                        
                                     </tr>
                                         

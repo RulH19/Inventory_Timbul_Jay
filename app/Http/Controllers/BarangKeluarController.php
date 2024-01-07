@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\JenisBarang;
 use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangKeluarController extends Controller
 {
@@ -29,26 +30,20 @@ class BarangKeluarController extends Controller
             'stok' => $request->stok,
             'nama_customer' => $request->nama_customer
         ];
-
-        BarangKeluar::create($data);
-        $data2 = [
-            'id_barang' => $request->id_barang,
-            'nama_barang' => $request->nama_barang,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-        ];
-        if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
-            // Jika data sudah ada, lakukan update quantity
-            Barang::where('id_barang', $request->id_barang, )->decrement('stok', $request->stok);
+        $barang = Barang::where('id_barang', $request->id_barang)->first();
+        Alert::success('Berhasil', 'Data Telah Ditambah');
+        if ($barang && $barang->stok >= $request->stok) {
+            Barang::where('id_barang', $request->id_barang)->decrement('stok', $request->stok);
+            BarangKeluar::create($data);
         } else {
-            // Jika data belum ada, lakukan insert
-            Barang::create($data2);
+            Alert::error('Gagal', 'Stock Tidak Mencukupi');
+            return redirect()->back()->with('Gagal', 'Stock Tidak Mencukupi');
         }
         return redirect()->route('barangKeluar');
     }
     public function edit($id)
     {
-        $barang = BarangKeluar::find($id)->first();
+        $barang = BarangKeluar::find($id);
         $jenisBarang = JenisBarang::get();
         return view('barangKeluar.form', ['barang' => $barang, 'jenisBarang' => $jenisBarang]);
     }
@@ -63,24 +58,24 @@ class BarangKeluarController extends Controller
         ];
 
         BarangKeluar::find($id)->update($data);
-        $data2 = [
-            'id_barang' => $request->id_barang,
-            'nama_barang' => $request->nama_barang,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-        ];
-        if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
-            // Jika data sudah ada, lakukan update quantity
-            Barang::where('id_barang', $request->id_barang, )->decrement('stok', $request->stok);
+        Alert::info('Berhasil', 'Data Telah diperbarui');
+        $barang = Barang::where('id_barang', $request->id_barang)->first();
+
+        if ($barang && $barang->stok >= $request->stok) {
+            Barang::where('id_barang', $request->id_barang)->decrement('stok', $request->stok);
         } else {
-            // Jika data belum ada, lakukan insert
-            Barang::create($data2);
+            Alert::error('Gagal', 'Stock Tidak Mencukupi');
+            return redirect()->back()->with('Gagal', 'Stock Tidak Mencukupi');
         }
         return redirect()->route('barangKeluar');
     }
-    public function hapus($id)
+    public function hapus($id, Request $request)
     {
-        BarangKeluar::find($id)->delete();
+
+        $barangKeluar = BarangKeluar::find($id);
+        $stokToDecrement = $barangKeluar->stok;
+        $barangKeluar->delete();
+        Barang::where('id_barang', $barangKeluar->id_barang)->increment('stok', $stokToDecrement);
 
         return redirect()->route('barangKeluar');
     }

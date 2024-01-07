@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -30,6 +31,12 @@ class UserController extends Controller
             'role' => $request->role,
         ];
         User::create($data);
+        Alert::success('Berhasil', 'Data Telah Ditambah');
+        return redirect()->route('user');
+    }
+    public function hapus($id)
+    {
+        User::find($id)->delete();
 
         return redirect()->route('user');
     }

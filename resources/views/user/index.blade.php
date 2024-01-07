@@ -25,7 +25,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Username</th>
-                                        <th>Password</th>    
+                                        <th>Alamat Email</th>    
                                         <th>Role</th>                                
                                     </tr>
                                 </thead>                                
@@ -39,8 +39,9 @@
                                         <td>{{ $role ->nama }}</td>
                                         <td>{{ $role ->email }}</td>
                                         <td>{{ $role ->role }}</td>
-                                        <td><a href="{{  route('user.edit', $role->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('user.hapus', $role->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a></td>
+                                        <td>
+                                            <a href="{{  route('user.hapus', $role->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        </td>
                                     </tr>
                                         
                                     @endforeach

@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Data Table Barang Masuk</h4>
+                            <h4 class="card-title">Data Barang Masuk</h4>
                             <a href="{{  route('barangMasuk.tambah') }}" class="btn btn-primary btn-round ml-auto">Tambah Barang</a>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id Barang</th>
+                                        <th>ID Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
@@ -38,12 +38,12 @@
                                         <th>{{ $no++ }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
-                                        <td>{{ $barang ->harga }}</td>
+                                        <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_penerima }}</td>
                                         <td>
-                                            <a href="{{  route('barangMasuk.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('barangMasuk.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a>
+                                            <a href="{{  route('barangMasuk.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                            <a href="{{  route('barangMasuk.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>                                        
                                     @endforeach

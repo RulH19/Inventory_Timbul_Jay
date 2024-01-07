@@ -11,11 +11,13 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="id_barang">Id Barang</label>
+                        <label for="id_barang">ID Barang</label>
                         <select name="id_barang" id="id_barang" class="custom-select">
                             <option value="" selected disabled hidden>-- Pilih Jenis Barang --</option>
                             @foreach ($jenisBarang as $row)
-                                <option value="{{ $row->nama_barang }}" {{ isset($barang) ? ($barang->id_barang == $row->id_barang ? 'selected' : '') : '' }}>{{ $row->nama_barang }}</option>
+                                <option value="{{ $row->id_barang }}" {{ isset($barang) ? ($barang->id_barang == $row->id_barang ? 'selected' : '') : '' }}>
+                                    {{ $row->id_barang }} == {{ $row->nama_barang }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -28,7 +30,7 @@
                         <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($barang) ? $barang->harga :'' }}">
                     </div>
                     <div class="form-group">
-                        <label for="stok">stok Barang</label>
+                        <label for="stok">Stok Barang</label>
                         <input type="number" class="form-control" id="stok" name="stok" value="{{ isset($barang) ? $barang->stok :'' }}">
                     </div>
                     <div class="form-group">

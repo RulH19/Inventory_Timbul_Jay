@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JenisBarangController extends Controller
 {
@@ -15,6 +16,7 @@ class JenisBarangController extends Controller
     public function tambah()
     {
         return view('jenisBarang.form');
+
     }
     public function simpan(Request $request)
     {
@@ -23,6 +25,7 @@ class JenisBarangController extends Controller
             return redirect()->route('jenisBarang');
         } else {
             JenisBarang::create(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
+            Alert::success('Berhasil', 'Data Telah Ditambah');
         }
         return redirect()->route('jenisBarang');
     }

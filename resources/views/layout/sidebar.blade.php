@@ -6,33 +6,37 @@
         <div class="sidebar-brand-text mx-3">Inventory Timbul Jaya<sup>2</sup></div>
     </a>
 
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Data Master</span>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('barang') }}">
+            <i class="fas fa-home"></i>
+            <span>Data Barang</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('user') }}">User</a>
-            <a class="dropdown-item" href="{{ route('barang') }}">Barang</a>
-        </div>
     </li>
-
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Barang</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('barangMasuk') }}">Barang Masuk</a>
-            <a class="dropdown-item" href="{{ route('barangKeluar') }}">Barang Keluar</a>
-        </div>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('user') }}">
+            <i class="fas fa-user"></i><span>  User</span></a>
+        {{-- @if (auth()->user()->role == 'manager')
+            
+        @endif     --}}
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('barangMasuk') }}">
+            <i class="fas fa-shopping-cart"></i><span> Barang Masuk</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('barangKeluar') }}">
+            <i class="fas fa-truck"></i><span> Barang Keluar</span></a>
+            {{-- @if(auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
+            
+            @endif --}}
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('jenisBarang') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Jenis Barang</span>
         </a>
     </li>
+
+    
 
 </ul>

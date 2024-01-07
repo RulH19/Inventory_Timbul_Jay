@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Barang;
 use App\Models\BarangMasuk;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangMasukController extends Controller
 {
@@ -32,6 +32,7 @@ class BarangMasukController extends Controller
         ];
 
         BarangMasuk::create($data);
+        Alert::success('Berhasil', 'Data Telah Ditambah');
         $data2 = [
             'id_barang' => $request->id_barang,
             'nama_barang' => $request->nama_barang,
@@ -51,7 +52,7 @@ class BarangMasukController extends Controller
     public function edit($id)
     {
         $jenisBarang = JenisBarang::get();
-        $barang = BarangMasuk::find($id)->first();
+        $barang = BarangMasuk::find($id);
         return view('barangMasuk.form', ['barang' => $barang, 'jenisBarang' => $jenisBarang]);
     }
     public function update($id, Request $request)
@@ -65,14 +66,14 @@ class BarangMasukController extends Controller
         ];
 
         BarangMasuk::find($id)->update($data);
-
+        Alert::info('Berhasil', 'Data Telah diperbarui');
         $data2 = [
             'id_barang' => $request->id_barang,
             'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
         ];
-        if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
+        if (Barang::where('id_barang', $request->id_barang)->exists()) {
             // Jika data sudah ada, lakukan update quantity
             Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
         } else {
@@ -81,9 +82,13 @@ class BarangMasukController extends Controller
         }
         return redirect()->route('barangMasuk');
     }
-    public function hapus($id)
+    public function hapus($id, Request $request)
     {
-        BarangMasuk::find($id)->delete();
+
+        $barangMasuk = BarangMasuk::find($id);
+        $stokToDecrement = $barangMasuk->stok;
+        $barangMasuk->delete();
+        Barang::where('id_barang', $barangMasuk->id_barang)->decrement('stok', $stokToDecrement);
 
         return redirect()->route('barangMasuk');
     }

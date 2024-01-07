@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="id_barang">Id Barang</label>
+                        <label for="id_barang">ID Barang</label>
                         <input type="text" class="form-control" id="id_barang" name="id_barang" value="{{ isset($jenisBarang) ? $jenisBarang->id_barang :'' }}">
                     </div>
                     <div class="form-group">

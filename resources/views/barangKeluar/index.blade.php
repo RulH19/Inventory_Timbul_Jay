@@ -4,7 +4,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Table Barang Keluar</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Barang Keluar</h6>
     </div>
     <div class="card-body">
         <div class="row">
@@ -24,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id Barang</th>
+                                        <th>ID Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
@@ -40,11 +40,11 @@
                                         <th>{{ $no++ }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
-                                        <td>{{ $barang ->harga }}</td>
+                                        <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_customer }}</td>
-                                        <td><a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('barangKeluar.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a></td>
+                                        <td><a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                            <a href="{{  route('barangKeluar.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a></td>
                                     </tr>
                                         
                                     @endforeach

@@ -29,12 +29,12 @@ class AuthController extends Controller
             ]);
         }
         $request->session()->regenerate();
-        return redirect()->route('dashboard');
+        return redirect()->route('barang');
     }
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
-        return redirect('login');
+        return redirect('/login');
     }
 }

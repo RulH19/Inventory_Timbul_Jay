@@ -13,7 +13,9 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Data Jenis Barang</h4>
+                            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                             <a href="{{  route('jenisBarang.tambah') }}" class="btn btn-primary btn-round ml-auto">Tambah Jenis Barang</a>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
@@ -22,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id Barang</th>
+                                        <th>ID Barang</th>
                                         <th>Nama Barang</th>                                    
                                     </tr>
                                 </thead>                                
@@ -35,10 +37,12 @@
                                         <th>{{ $no++}}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
+                                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                                         <td>
-                                            <a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>edit</a>
-                                            <a href="{{  route('jenisBarang.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>hapus</a>
+                                            <a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                            <a href="{{  route('jenisBarang.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
+                                        @endif
                                     </tr>                                        
                                     @endforeach
                                 </tbody>
