@@ -12,23 +12,24 @@
             <span>Data Barang</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('user') }}">
-            <i class="fas fa-user"></i><span>  User</span></a>
-        {{-- @if (auth()->user()->role == 'manager')
+    
+    @if (auth()->user()->role == 'manager')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user') }}">
+                <i class="fas fa-user"></i><span>  User</span></a>
             
-        @endif     --}}
-    </li>
+        </li>   
+    @endif      
+            
+    @if(auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ route('barangMasuk') }}">
             <i class="fas fa-shopping-cart"></i><span> Barang Masuk</span></a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ route('barangKeluar') }}">
-            <i class="fas fa-truck"></i><span> Barang Keluar</span></a>
-            {{-- @if(auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
-            
-            @endif --}}
+        <i class="fas fa-truck"></i><span> Barang Keluar</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('jenisBarang') }}">

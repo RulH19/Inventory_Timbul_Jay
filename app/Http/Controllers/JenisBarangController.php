@@ -10,7 +10,7 @@ class JenisBarangController extends Controller
 {
     public function index()
     {
-        $jenisBarang = JenisBarang::get();
+        $jenisBarang = JenisBarang::paginate(5);
         return view("jenisBarang/index", ['jenisBarang' => $jenisBarang]);
     }
     public function tambah()
@@ -40,9 +40,21 @@ class JenisBarangController extends Controller
         JenisBarang::find($id)->update(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
         return redirect()->route('jenisBarang');
     }
-    public function hapus($id)
+    // public function hapus($id)
+    // {
+    //     JenisBarang::find($id)->delete();
+    //     return redirect()->route('jenisBarang');
+    // }
+    public function hapus($id, Request $request)
     {
-        JenisBarang::find($id)->delete();
-        return redirect()->route('jenisBarang');
+        $id_barang = $request->input('id_barang');
+        $jenisBarang = JenisBarang::find($id_barang);
+
+        if ($jenisBarang) {
+            $jenisBarang->nama_barang = $id_barang;
+            $jenisBarang->delete();
+
+            return redirect()->route('jenisBarang');
+        }
     }
 }

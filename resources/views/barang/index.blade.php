@@ -33,17 +33,17 @@
                                     @php
                                         ($no = 1)
                                     @endphp
-                                    @foreach ($data as $barang)
+                                    @foreach ($data as $index => $barang)
                                     <tr>
-                                        <th>{{ $no++ }}</th>
+                                        <th>{{$index + $data->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>                                        
-                                    </tr>
-                                        
+                                    </tr>                                        
                                     @endforeach
                                 </tbody>
+                                {{ $data ->links() }}
                             </table>
                         </div>
                         

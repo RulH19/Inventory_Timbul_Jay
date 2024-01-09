@@ -12,7 +12,7 @@ class BarangMasukController extends Controller
 {
     public function index()
     {
-        $barang = BarangMasuk::get();
+        $barang = BarangMasuk::paginate(5);
 
         return view('barangMasuk.index', ['data' => $barang]);
     }
@@ -84,13 +84,16 @@ class BarangMasukController extends Controller
     }
     public function hapus($id, Request $request)
     {
-
-        $barangMasuk = BarangMasuk::find($id);
+        $id_barang = $request->input('id_barang');
+        $barangMasuk = BarangMasuk::find($id_barang);
         $stokToDecrement = $barangMasuk->stok;
         Barang::where('id_barang', $barangMasuk->id_barang)->decrement('stok', $stokToDecrement);
-        $barangMasuk->delete();
 
+        if ($barangMasuk) {
+            $barangMasuk->nama_barang = $id_barang;
+            $barangMasuk->delete();
 
-        return redirect()->route('barangMasuk');
+            return redirect()->route('barangMasuk');
+        }
     }
 }

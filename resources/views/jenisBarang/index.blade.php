@@ -31,22 +31,23 @@
                                 <tbody>
                                     @php
                                         ($no = 1)
-                                    @endphp
-                                    @foreach ($jenisBarang as $barang)
+                                    @endphp                                
+                                    @foreach ($jenisBarang as $index => $barang)
                                     <tr>
-                                        <th>{{ $no++}}</th>
+                                        <th>{{ $index + $jenisBarang->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                                         <td>
                                             <a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                                            <a href="{{  route('jenisBarang.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                            <button type="button" onclick="popupSwal({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
                                         @endif
                                     </tr>                                        
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $jenisBarang -> links() }}
                         </div>                        
                     </div>
                 </div>

@@ -41,15 +41,17 @@ Route::middleware('auth')->group(function () {
         Route::post('tambah', 'simpan')->name('barangMasuk.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('barangMasuk.edit');
         Route::post('edit/{id}', 'update')->name('barangMasuk.tambah.update');
-        Route::get('hapus/{id}', 'hapus')->name('barangMasuk.hapus');
+        Route::post('hapus/{id}', 'hapus');
     });
+    // Route::post('hapusBarangMasuk/{id}', [BarangMasukController::class, 'hapusBarangMasuk']);
+
     Route::controller(BarangKeluarController::class)->prefix('barangKeluar')->group(function () {
         Route::get('', 'index')->name('barangKeluar');
         Route::get('tambah', 'tambah')->name('barangKeluar.tambah');
         Route::post('tambah', 'simpan')->name('barangKeluar.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('barangKeluar.edit');
         Route::post('edit/{id}', 'update')->name('barangKeluar.tambah.update');
-        Route::get('hapus/{id}', 'hapus')->name('barangKeluar.hapus');
+        Route::post('hapus/{id}', 'hapus');
     });
     Route::controller(JenisBarangController::class)->prefix('jenisBarang')->group(function () {
         Route::get('', 'index')->name('jenisBarang');
@@ -58,6 +60,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('jenisBarang.edit');
         Route::post('edit/{id}', 'update')->name('jenisBarang.tambah.update');
         Route::get('hapus/{id}', 'hapus')->name('jenisBarang.hapus');
+        Route::post('hapus/{id}', 'hapus');
     });
     Route::controller(UserController::class)->prefix('user')->group(function () {
         Route::get('', 'index')->name('user');
@@ -66,5 +69,6 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('user.edit');
         Route::post('edit/{id}', 'update')->name('user.tambah.update');
         Route::get('hapus/{id}', 'hapus')->name('user.hapus');
+        Route::post('hapus/{id}', 'hapus');
     });
 });

@@ -8,7 +8,7 @@ class BarangController extends Controller
 {
     public function index()
     {
-        $data = Barang::all(); // Mengambil semua data dari tabel menggunakan model
+        $data = Barang::paginate(5);
         return view('barang.index', ['data' => $data]);
     }
 }

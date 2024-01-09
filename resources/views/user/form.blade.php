@@ -25,8 +25,13 @@
                     </div>      
                     <div class="form-group">
                         <label for="role">Role</label>
-                        <input type="text" class="form-control form-control-user" id="role" name="role"  placeholder="Role" value="{{ isset($user) ? $user->role :'' }}">
-                    </div>  
+                        <select class="form-control" id="role" name="role">
+                            <option value="" selected disabled hidden>-- Pilih Role User--</option>
+                            <option value="admin" {{ isset($user) && $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="manager" {{ isset($user) && $user->role == 'manager' ? 'selected' : '' }}>Manager</option>
+                            <option value="kasir" {{ isset($user) && $user->role == 'kasir' ? 'selected' : '' }}>Kasir</option>
+                        </select>
+                    </div>
                  </div>     
 
                 <div class="card-footer">

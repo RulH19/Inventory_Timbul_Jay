@@ -35,28 +35,28 @@
                                     @php
                                         ($no = 1)
                                     @endphp
-                                    @foreach ($data as $barang)
+                                    @foreach ($data as $index => $barang)
                                     <tr>
-                                        <th>{{ $no++ }}</th>
+                                        <th>{{ $index + $data->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_customer }}</td>
-                                        <td><a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                                            <a href="{{  route('barangKeluar.hapus', $barang->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a></td>
-                                    </tr>
-                                        
+                                        <td>
+                                            <a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                            <button type="button" onclick="popupSwal({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                                        </td>
+                                    </tr>                                        
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        
+                            {{ $data ->links()}}
+                        </div>                        
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>        
     </div>
 </div>
 @endsection

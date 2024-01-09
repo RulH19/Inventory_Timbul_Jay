@@ -33,20 +33,20 @@
                                     @php
                                         ($no = 1)
                                     @endphp
-                                    @foreach ($data as $role)
+                                    @foreach ($data as $index => $role)
                                     <tr>
-                                        <th>{{ $no++}}</th>
+                                        <th>{{ $index + $data ->firstItem()}}</th>
                                         <td>{{ $role ->nama }}</td>
                                         <td>{{ $role ->email }}</td>
                                         <td>{{ $role ->role }}</td>
                                         <td>
-                                            <a href="{{  route('user.hapus', $role->id) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                            <button type="button" onclick="popupSwal({{ $role->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
-                                    </tr>
-                                        
+                                    </tr>                                        
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $data -> links() }}
                         </div>
                         
                     </div>
