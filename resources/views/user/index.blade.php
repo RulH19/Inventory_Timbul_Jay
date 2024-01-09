@@ -40,7 +40,7 @@
                                         <td>{{ $role ->email }}</td>
                                         <td>{{ $role ->role }}</td>
                                         <td>
-                                            <button type="button" onclick="popupSwal({{ $role->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                                            <button type="button" onclick="popupSwalUser('{{ $role->id }}')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>                                        
                                     @endforeach
@@ -57,3 +57,43 @@
     </div>
 </div>
 @endsection
+<script>
+    function DeleteUser(id) {
+        fetch('hapus/'+ id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+                },
+                body: JSON.stringify({
+                    id: id,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Berhasil hapus:', data.message);
+            })
+            .catch(error => {
+                console.error('Gagal Hapus:', error);
+            });
+        };
+
+
+        function popupSwalUser(id){
+        Swal.fire({
+          title: "Apakah anda yakin?",
+          text: "Data akan di hapus permanent",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            
+            DeleteUser(id);
+            location.reload();
+          }
+        });
+    }
+</script>

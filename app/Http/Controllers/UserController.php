@@ -34,10 +34,14 @@ class UserController extends Controller
         Alert::success('Berhasil', 'Data Telah Ditambah');
         return redirect()->route('user');
     }
-    public function hapus($id)
+    public function hapusUser(Request $request)
     {
-        User::find($id)->delete();
+        $id = $request->input('id');
+        $user = User::find($id);
 
-        return redirect()->route('user');
+        if ($user) {
+            $user->delete();
+            return redirect()->route('barangMasuk');
+        }
     }
 }

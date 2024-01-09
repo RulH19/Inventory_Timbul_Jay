@@ -75,7 +75,7 @@ class BarangKeluarController extends Controller
         }
         return redirect()->route('barangKeluar');
     }
-    public function hapus($id, Request $request)
+    public function hapusBarangKeluar($id, Request $request)
     {
         $id_barang = $request->input('id_barang');
         $barangKeluar = BarangKeluar::find($id_barang);
@@ -88,5 +88,6 @@ class BarangKeluarController extends Controller
 
             return redirect()->route('barangKeluar');
         }
+
     }
 }

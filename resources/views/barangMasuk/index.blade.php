@@ -43,7 +43,7 @@
                                         <td>{{ $barang ->nama_penerima }}</td>
                                         <td>
                                             <a href="{{  route('barangMasuk.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                                            <button type="button" onclick="popupSwal({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button></td>
+                                            <button type="button" onclick="popupSwalBarangMasuk({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button></td>
                                         </td>
                                     </tr>                                        
                                     @endforeach
@@ -58,3 +58,46 @@
     </div>
 </div>
 @endsection
+<script>
+    function DeleteBarangMasuk(id) {
+        fetch('hapusBarangMasuk/'+id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+                },
+                body: JSON.stringify({
+                    id_barang: id,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // location.reload();
+                console.log('1s');
+                console.log('Booking status updated successfully:', data.message);
+            })
+            .catch(error => {
+                console.error('Failed to update booking status:', error);
+                console.log('2');
+            });
+        };
+
+
+        function popupSwalBarangMasuk(id){
+        Swal.fire({
+          title: "Apakah anda yakin?",
+          text: "Data akan di hapus permanent",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            
+            DeleteBarangMasuk(id);
+            location.reload();
+          }
+        });
+    }
+</script>

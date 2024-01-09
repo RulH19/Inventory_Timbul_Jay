@@ -45,7 +45,7 @@ class JenisBarangController extends Controller
     //     JenisBarang::find($id)->delete();
     //     return redirect()->route('jenisBarang');
     // }
-    public function hapus($id, Request $request)
+    public function hapusJenisBarang($id, Request $request)
     {
         $id_barang = $request->input('id_barang');
         $jenisBarang = JenisBarang::find($id_barang);

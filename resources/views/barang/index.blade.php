@@ -42,9 +42,9 @@
                                         <td>{{ $barang ->stok }}</td>                                        
                                     </tr>                                        
                                     @endforeach
-                                </tbody>
-                                {{ $data ->links() }}
+                                </tbody>                                
                             </table>
+                            {{ $data ->links() }}
                         </div>
                         
                     </div>

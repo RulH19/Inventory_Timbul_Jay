@@ -44,46 +44,6 @@
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    <script>
-        function DeleteItem(id) {
-            fetch('hapus/'+id, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' 
-                    },
-                    body: JSON.stringify({
-                        id_barang: id,
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    location.reload();
-                    console.log('Booking status updated successfully:', data.message);
-                })
-                .catch(error => {
-                    console.error('Failed to update booking status:', error);
-                });
-            };
-    
-    
-            function popupSwal(id){
-            Swal.fire({
-              title: "Apakah anda yakin?",
-              text: "Data akan di hapus permanent",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Ya"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                
-                DeleteItem(id);
-                location.reload();
-              }
-            });
-        }
-    </script>
+
     </body>
 </html>

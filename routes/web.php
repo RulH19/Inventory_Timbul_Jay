@@ -41,9 +41,10 @@ Route::middleware('auth')->group(function () {
         Route::post('tambah', 'simpan')->name('barangMasuk.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('barangMasuk.edit');
         Route::post('edit/{id}', 'update')->name('barangMasuk.tambah.update');
-        Route::post('hapus/{id}', 'hapus');
+        // Route::post('hapus/{id}', 'hapusBarangMasuk');
     });
-    // Route::post('hapusBarangMasuk/{id}', [BarangMasukController::class, 'hapusBarangMasuk']);
+    Route::post('hapusBarangMasuk/{id}', [BarangMasukController::class, 'hapusBarangMasuk']);
+
 
     Route::controller(BarangKeluarController::class)->prefix('barangKeluar')->group(function () {
         Route::get('', 'index')->name('barangKeluar');
@@ -51,24 +52,27 @@ Route::middleware('auth')->group(function () {
         Route::post('tambah', 'simpan')->name('barangKeluar.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('barangKeluar.edit');
         Route::post('edit/{id}', 'update')->name('barangKeluar.tambah.update');
-        Route::post('hapus/{id}', 'hapus');
+        // Route::post('hapus/{id}', 'hapus');
     });
+    Route::post('hapusBarangKeluar/{id}', [BarangKeluarController::class, 'hapusBarangKeluar']);
+
     Route::controller(JenisBarangController::class)->prefix('jenisBarang')->group(function () {
         Route::get('', 'index')->name('jenisBarang');
         Route::get('tambah', 'tambah')->name('jenisBarang.tambah');
         Route::post('tambah', 'simpan')->name('jenisBarang.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('jenisBarang.edit');
         Route::post('edit/{id}', 'update')->name('jenisBarang.tambah.update');
-        Route::get('hapus/{id}', 'hapus')->name('jenisBarang.hapus');
-        Route::post('hapus/{id}', 'hapus');
+        // Route::post('hapus/{id}', 'hapusJenisBarang');
     });
+    Route::post('hapusJenisBarang/{id}', [JenisBarangController::class, 'hapusJenisBarang']);
     Route::controller(UserController::class)->prefix('user')->group(function () {
         Route::get('', 'index')->name('user');
         Route::get('tambah', 'tambah')->name('user.tambah');
         Route::post('tambah', 'simpan')->name('user.tambah.simpan');
         Route::get('edit/{id}', 'edit')->name('user.edit');
         Route::post('edit/{id}', 'update')->name('user.tambah.update');
-        Route::get('hapus/{id}', 'hapus')->name('user.hapus');
-        Route::post('hapus/{id}', 'hapus');
+        // Route::post('hapus/{id}', 'hapusUser');
     });
+    Route::post('hapus/{id}', [UserController::class, 'hapusUser']);
+
 });

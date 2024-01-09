@@ -82,7 +82,7 @@ class BarangMasukController extends Controller
         }
         return redirect()->route('barangMasuk');
     }
-    public function hapus($id, Request $request)
+    public function hapusBarangMasuk($id, Request $request)
     {
         $id_barang = $request->input('id_barang');
         $barangMasuk = BarangMasuk::find($id_barang);
