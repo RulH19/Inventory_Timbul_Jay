@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Data Table Barang Keluar</h4>
-                            <a href="{{  route('barangKeluar.tambah') }}" class="btn btn-primary btn-round ml-auto">Tambah Barang</a>
+                            <a href="{{  route('barangKeluar.tambah') }}" class="btn btn-primary btn-round ml-auto">Pilih Barang</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -27,8 +27,9 @@
                                         <th>ID Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Harga</th>
-                                        <th>Stok</th>
+                                        <th>Jumlah</th>
                                         <th>Nama Customer</th>
+                                        <th>Tanggal</th>
                                     </tr>
                                 </thead>                                
                                 <tbody>
@@ -43,10 +44,13 @@
                                         <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_customer }}</td>
+                                        <td>{{ $barang->created_at->format('Y-m-d') }}</td>  
+                                        @if (auth()->user()->role == 'manager' || auth()->user()->role == 'kasir')
                                         <td>
                                             <a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
                                             <button type="button" onclick="popupSwalBarangKeluar({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
+                                        @endif
                                     </tr>                                        
                                     @endforeach
                                 </tbody>
@@ -74,13 +78,10 @@
             })
             .then(response => response.json())
             .then(data => {
-                // location.reload();
-                console.log('1s');
-                console.log('Booking status updated successfully:', data.message);
+                console.log('Berhasil hapus :', data.message);
             })
             .catch(error => {
-                console.error('Failed to update booking status:', error);
-                console.log('2');
+                console.error('Gagal hapus:', error);
             });
         };
 

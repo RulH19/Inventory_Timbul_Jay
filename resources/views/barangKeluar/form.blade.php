@@ -7,12 +7,12 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"> {{  isset($barang) ? 'Form Edit Barang Keluar':'Form Tambah Barang Keluar' }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> {{  isset($barang) ? 'Form Edit Barang Keluar':'Form Pilih Barang Keluar' }}</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="id_barang">ID Barang</label>
-                        <select name="id_barang" id="id_barang" class="custom-select">
+                        <select name="id_barang" id="id_barang" class="custom-select" required>
                             <option value="" selected disabled hidden>-- Pilih Jenis Barang --</option>
                             @foreach ($jenisBarang as $row)
                                 <option value="{{ $row->id_barang }}" {{ isset($barang) ? ($barang->id_barang == $row->id_barang ? 'selected' : '') : '' }}>
@@ -23,19 +23,19 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($barang) ? $barang->nama_barang :'' }}">
+                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($barang) ? $barang->nama_barang :'' }}" required>
                     </div>
                     <div class="form-group">
                         <label for="harga">Harga Barang</label>
-                        <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($barang) ? $barang->harga :'' }}">
+                        <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($barang) ? $barang->harga :'' }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="stok">Stok Barang</label>
-                        <input type="number" class="form-control" id="stok" name="stok" value="{{ isset($barang) ? $barang->stok :'' }}">
+                        <label for="stok">Jumlah Barang</label>
+                        <input type="number" class="form-control" id="stok" name="stok" value="{{ isset($barang) ? $barang->stok :'' }}" required>
                     </div>
                     <div class="form-group">
                         <label for="nama_customer">Nama Customer</label>
-                        <input type="text" class="form-control" id="nama_customer" name="nama_customer" value="{{ isset($barang) ? $barang->nama_customer :'' }}">
+                        <input type="text" class="form-control" id="nama_customer" name="nama_customer" value="{{ isset($barang) ? $barang->nama_customer :'' }}" required>
                     </div>
                 </div>
                 <div class="card-footer">

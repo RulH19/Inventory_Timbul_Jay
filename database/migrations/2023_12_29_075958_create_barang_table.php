@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignUlid('id_barang');
             $table->string('nama_barang');
-            $table->decimal('harga');
+            $table->integer('harga_beli');
+            $table->integer('harga_jual');
+            $table->string('gambar');
             $table->integer('stok')->default(0);
             $table->timestamps();
         });

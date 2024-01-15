@@ -11,7 +11,7 @@ class JenisBarang extends Model
     protected $table = 'jenisBarang';
     protected $fillable = [
         'id_barang',
-        'nama_barang',
+        'nama_barang'
     ];
     public function barangMasuk()
     {

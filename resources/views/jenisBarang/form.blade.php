@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('title','Form Jenis Barang')
 @section('content')
-<form action="{{ isset($jenisBarang) ?route('jenisBarang.tambah.update', $jenisBarang->id) : route('jenisBarang.tambah.simpan') }}" method="post">
+<form action="{{ isset($jenisBarang) ?route('jenisBarang.tambah.update', $jenisBarang->id) : route('jenisBarang.tambah.simpan') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-12">
@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
                         <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($jenisBarang) ? $jenisBarang->nama_barang :'' }}">
-                    </div>                   
+                    </div>                                  
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

@@ -22,10 +22,12 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th>No</th>                                        
+                                        <th>Gambar Barang</th>
                                         <th>Id Barang</th>
                                         <th>Nama Barang</th>
-                                        <th>Harga</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
                                         <th>Stok</th>
                                     </tr>
                                 </thead>                                
@@ -36,10 +38,15 @@
                                     @foreach ($data as $index => $barang)
                                     <tr>
                                         <th>{{$index + $data->firstItem() }}</th>
+                                        <td>
+                                            <img src="{{ asset('img/' . $barang->gambar) }}" alt="{{ $barang->nama_barang }}" width="80" height="80">
+                                        </td>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
-                                        <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
-                                        <td>{{ $barang ->stok }}</td>                                        
+                                        <td>{{ 'Rp '.number_format($barang->harga_beli, 0, ',', '.') }}</td>
+                                        <td>{{ 'Rp '.number_format($barang->harga_jual, 0, ',', '.') }}</td>
+                                        <td>{{ $barang ->stok }}</td>  
+                                                                            
                                     </tr>                                        
                                     @endforeach
                                 </tbody>                                

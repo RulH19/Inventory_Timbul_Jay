@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JenisBarangController extends Controller
@@ -20,11 +22,15 @@ class JenisBarangController extends Controller
     }
     public function simpan(Request $request)
     {
-
+        $data = [
+            'id_barang' => $request->id_barang,
+            'nama_barang' => $request->nama_barang
+        ];
         if (JenisBarang::where('id_barang', $request->id_barang)->value('id_barang')) {
+            alert()->error('Gagal', 'Id Barang Sudah Tersedia');
             return redirect()->route('jenisBarang');
         } else {
-            JenisBarang::create(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
+            JenisBarang::create($data);
             Alert::success('Berhasil', 'Data Telah Ditambah');
         }
         return redirect()->route('jenisBarang');
@@ -32,19 +38,20 @@ class JenisBarangController extends Controller
 
     public function edit($id)
     {
-        $jenisBarang = JenisBarang::find($id)->first();
+        $jenisBarang = JenisBarang::find($id);
         return view('jenisBarang.form', ['jenisBarang' => $jenisBarang]);
     }
     public function update(Request $request, $id)
     {
-        JenisBarang::find($id)->update(['id_barang' => $request->id_barang, 'nama_barang' => $request->nama_barang]);
+        $data = [
+            'id_barang' => $request->id_barang,
+            'nama_barang' => $request->nama_barang
+        ];
+
+        JenisBarang::find($id)->update($data);
+
         return redirect()->route('jenisBarang');
     }
-    // public function hapus($id)
-    // {
-    //     JenisBarang::find($id)->delete();
-    //     return redirect()->route('jenisBarang');
-    // }
     public function hapusJenisBarang($id, Request $request)
     {
         $id_barang = $request->input('id_barang');

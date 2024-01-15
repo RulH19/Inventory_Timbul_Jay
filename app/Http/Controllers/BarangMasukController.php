@@ -28,6 +28,7 @@ class BarangMasukController extends Controller
             'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
+            'gambar' => $request->file('gambar')->getClientOriginalName(),
             'nama_penerima' => $request->nama_penerima
         ];
 
@@ -38,12 +39,14 @@ class BarangMasukController extends Controller
             'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
+            'gambar' => $request->file('gambar')->getClientOriginalName()
         ];
         if (Barang::where('id_barang', $request->id_barang)->value('id_barang')) {
             // Jika data sudah ada, lakukan update quantity
             Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
         } else {
             // Jika data belum ada, lakukan insert
+            $request->file('gambar')->move('img/', $request->file('gambar')->getClientOriginalName());
             Barang::create($data2);
         }
 
@@ -64,7 +67,8 @@ class BarangMasukController extends Controller
             'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
-            'nama_penerima' => $request->nama_penerima
+            'nama_penerima' => $request->nama_penerima,
+            'gambar' => $request->file('gambar')->getClientOriginalName()
         ];
 
         BarangMasuk::find($id)->update($data);
@@ -74,10 +78,12 @@ class BarangMasukController extends Controller
             'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
+            'gambar' => $request->file('gambar')->getClientOriginalName()
         ];
         if (Barang::where('id_barang', $request->id_barang)->exists()) {
             Barang::where('id_barang', $request->id_barang, )->increment('stok', $request->stok);
         } else {
+
             Barang::create($data2);
         }
         return redirect()->route('barangMasuk');

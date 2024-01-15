@@ -15,7 +15,8 @@ class BarangMasuk extends Model
         'nama_barang',
         'harga',
         'stok',
-        'nama_penerima'
+        'nama_penerima',
+        'gambar'
     ];
     public function jenisBarang()
     {

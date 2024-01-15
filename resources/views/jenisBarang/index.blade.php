@@ -25,7 +25,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>ID Barang</th>
-                                        <th>Nama Barang</th>                                    
+                                        <th>Nama Barang</th>                                   
                                     </tr>
                                 </thead>                                
                                 <tbody>
@@ -37,6 +37,7 @@
                                         <th>{{ $index + $jenisBarang->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
                                         <td>{{ $barang ->nama_barang }}</td>
+                                        
                                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'manager')
                                         <td>
                                             <a href="{{  route('jenisBarang.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
@@ -70,13 +71,10 @@
             })
             .then(response => response.json())
             .then(data => {
-                // location.reload();
-                console.log('1s');
-                console.log('Booking status updated successfully:', data.message);
+                console.log('Berhasil hapus :', data.message);
             })
             .catch(error => {
-                console.error('Failed to update booking status:', error);
-                console.log('2');
+                console.error('Gagal hapus:', error);
             });
         };
 
