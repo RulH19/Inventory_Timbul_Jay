@@ -14,11 +14,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="id_barang">ID Barang</label>
-                        <input type="text" class="form-control" id="id_barang" name="id_barang" value="{{ isset($jenisBarang) ? $jenisBarang->id_barang :'' }}">
+                        <input type="text" class="form-control" id="id_barang" name="id_barang" value="{{ isset($jenisBarang) ? $jenisBarang->id_barang :'' }}" required>
                     </div>
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($jenisBarang) ? $jenisBarang->nama_barang :'' }}">
+                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($jenisBarang) ? $jenisBarang->nama_barang :'' }}" required>
                     </div>                                  
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>

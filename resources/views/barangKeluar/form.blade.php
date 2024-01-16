@@ -26,7 +26,7 @@
                         <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($barang) ? $barang->nama_barang :'' }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="harga">Harga Barang</label>
+                        <label for="harga">Harga Jual</label>
                         <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($barang) ? $barang->harga :'' }}" required>
                     </div>
                     <div class="form-group">

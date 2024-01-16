@@ -28,7 +28,7 @@
         <a class="nav-link" href="{{ route('barangKeluar') }}">
         <i class="fas fa-truck"></i><span> Barang Keluar</span></a>
     </li>
-    <li class="nav-item {{ Route::currentRouteName() == 'JenisBarang' ? 'active' : '' }}">
+    <li class="nav-item {{ Route::currentRouteName() == 'jenisBarang' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('jenisBarang') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Jenis Barang</span>
