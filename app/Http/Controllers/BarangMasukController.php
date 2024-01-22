@@ -6,13 +6,23 @@ use App\Models\Barang;
 use App\Models\BarangMasuk;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangMasukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barang = BarangMasuk::paginate(5);
+
+
+        // Tambahkan kondisi pencarian jika ada input 'search'
+        if ($request->has('search')) {
+            $barang = BarangMasuk::where('id_barang', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('nama_penerima', 'LIKE', '%' . $request->search . '%')->paginate(5);
+        } else {
+            $barang = BarangMasuk::paginate(5);
+        }
+
 
         return view('barangMasuk.index', ['data' => $barang]);
     }
@@ -25,11 +35,11 @@ class BarangMasukController extends Controller
     {
         $data = [
             'id_barang' => $request->id_barang,
-            'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
             'gambar' => $request->file('gambar')->getClientOriginalName(),
-            'nama_penerima' => $request->nama_penerima
+            'nama_penerima' => $request->nama_penerima,
+            'tanggal' => $request->tanggal_input
         ];
 
         BarangMasuk::create($data);
@@ -64,18 +74,17 @@ class BarangMasukController extends Controller
     {
         $data = [
             'id_barang' => $request->id_barang,
-            'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
             'nama_penerima' => $request->nama_penerima,
-            'gambar' => $request->file('gambar')->getClientOriginalName()
+            'gambar' => $request->file('gambar')->getClientOriginalName(),
+            'tanggal' => $request->tanggal_input
         ];
 
         BarangMasuk::find($id)->update($data);
         Alert::info('Berhasil', 'Data Telah diperbarui');
         $data2 = [
             'id_barang' => $request->id_barang,
-            'nama_barang' => $request->nama_barang,
             'harga' => $request->harga,
             'stok' => $request->stok,
             'gambar' => $request->file('gambar')->getClientOriginalName()

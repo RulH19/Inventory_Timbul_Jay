@@ -12,10 +12,10 @@ class BarangKeluar extends Model
 
     protected $fillable = [
         'id_barang',
-        'nama_barang',
         'harga',
         'stok',
-        'nama_customer'
+        'nama_customer',
+        'tanggal',
     ];
     public function jenisBarang()
     {

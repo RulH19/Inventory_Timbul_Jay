@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('harga_jual');
             $table->string('gambar');
             $table->integer('stok')->default(0);
+            $table->integer('terjual')->default(0);
             $table->timestamps();
         });
     }

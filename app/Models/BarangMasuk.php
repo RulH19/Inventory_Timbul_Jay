@@ -12,11 +12,11 @@ class BarangMasuk extends Model
 
     protected $fillable = [
         'id_barang',
-        'nama_barang',
         'harga',
         'stok',
         'nama_penerima',
-        'gambar'
+        'gambar',
+        'tanggal'
     ];
     public function jenisBarang()
     {

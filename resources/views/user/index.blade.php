@@ -17,6 +17,16 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <form action="{{ route('user') }}" method="GET" class="mb-3">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan username, email, atau role">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                         <!-- Modal -->
                         <div class="table-responsive">
 

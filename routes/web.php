@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -75,4 +76,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::post('hapus/{id}', [UserController::class, 'hapusUser']);
 
+    Route::controller(LaporanController::class)->prefix('laporan')->group(function () {
+        Route::get('', 'index')->name('laporan');
+    });
 });

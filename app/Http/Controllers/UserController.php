@@ -12,9 +12,16 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::paginate(5);
+        if ($request->has('search')) {
+            $user = User::where('nama', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('role', 'LIKE', '%' . $request->search . '%')
+                ->paginate(5);
+        } else {
+            $user = User::paginate(5);
+        }
         return view("user.index", ['data' => $user]);
     }
     public function tambah()

@@ -13,11 +13,23 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Data Table Barang Keluar</h4>
+                            
+                            @if (auth()->user()->role == 'manager' || auth()->user()->role == 'kasir')
                             <a href="{{  route('barangKeluar.tambah') }}" class="btn btn-primary btn-round ml-auto">Pilih Barang</a>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
-                        <!-- Modal -->
+                        <form action="{{ route('barangKeluar') }}" method="GET" class="mb-3">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan ID Barang, Nama Customer, atau Tanggal">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
 
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -25,8 +37,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>ID Barang</th>
-                                        <th>Nama Barang</th>
-                                        <th>Harga</th>
+                                        <th>Harga Jual</th>
                                         <th>Jumlah</th>
                                         <th>Nama Customer</th>
                                         <th>Tanggal</th>
@@ -40,11 +51,10 @@
                                     <tr>
                                         <th>{{ $index + $data->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
-                                        <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_customer }}</td>
-                                        <td>{{ $barang->created_at->format('Y-m-d') }}</td>  
+                                        <td>{{ $barang->tanggal }}</td>  
                                         @if (auth()->user()->role == 'manager' || auth()->user()->role == 'kasir')
                                         <td>
                                             <a href="{{  route('barangKeluar.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>

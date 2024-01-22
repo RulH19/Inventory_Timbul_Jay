@@ -18,7 +18,16 @@
                     <div class="card-body">
                         <!-- Modal -->
                         <div class="table-responsive">
-
+                            <form action="{{ route('barang') }}" method="GET" class="mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan ID Barang atau Nama Barang">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>

@@ -10,9 +10,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class JenisBarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jenisBarang = JenisBarang::paginate(5);
+        if ($request->has('search')) {
+            $jenisBarang = JenisBarang::where('id_barang', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('nama_barang', 'LIKE', '%' . $request->search . '%')->paginate(5);
+        } else {
+            $jenisBarang = JenisBarang::paginate(5);
+        }
         return view("jenisBarang/index", ['jenisBarang' => $jenisBarang]);
     }
     public function tambah()

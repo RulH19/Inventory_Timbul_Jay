@@ -22,10 +22,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ isset($barang) ? $barang->nama_barang :'' }}" required>
-                    </div>
-                    <div class="form-group">
                         <label for="harga">Harga Jual</label>
                         <input type="text" class="form-control" id="harga" name="harga" value="{{ isset($barang) ? $barang->harga :'' }}" required>
                     </div>
@@ -36,6 +32,10 @@
                     <div class="form-group">
                         <label for="nama_customer">Nama Customer</label>
                         <input type="text" class="form-control" id="nama_customer" name="nama_customer" value="{{ isset($barang) ? $barang->nama_customer :'' }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_input">Tanggal Input</label>
+                        <input type="date" class="form-control" id="tanggal_input" name="tanggal_input" value="{{ isset($barang) ? $barang->created_at->toDateString() : '' }}" required>
                     </div>
                 </div>
                 <div class="card-footer">

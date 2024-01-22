@@ -14,17 +14,27 @@
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Data Table Barang Masuk</h4>
                             <a href="{{  route('barangMasuk.tambah') }}" class="btn btn-primary btn-round ml-auto">Tambah Barang</a>
+                            
                         </div>
                     </div>
                     <div class="card-body">
+                        <form action="{{ route('barangMasuk') }}" method="GET" class="mb-3">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan ID Barang, Nama Penerima, atau Tanggal">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>ID Barang</th>
-                                        <th>Nama Barang</th>
-                                        <th>Harga</th>
+                                        <th>Harga Beli</th>
                                         <th>Stok</th>
                                         <th>Nama Penerima</th>
                                         <th>Tanggal</th>
@@ -38,11 +48,10 @@
                                     <tr>
                                         <th>{{ $index + $data->firstItem() }}</th>
                                         <td>{{ $barang ->id_barang }}</td>
-                                        <td>{{ $barang ->nama_barang }}</td>
                                         <td>{{ 'Rp '.number_format($barang->harga, 0, ',', '.') }}</td>
                                         <td>{{ $barang ->stok }}</td>
                                         <td>{{ $barang ->nama_penerima }}</td>
-                                        <td>{{ $barang->created_at->format('Y-m-d') }}</td>  
+                                        <td>{{ $barang->tanggal }}</td>  
                                         <td>
                                             <a href="{{  route('barangMasuk.edit', $barang->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
                                             <button type="button" onclick="popupSwalBarangMasuk({{ $barang->id }})" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Hapus</button></td>
